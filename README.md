@@ -8,7 +8,7 @@
 
 ## Overview
 
-This project characterizes superconducting transmon qubits on IBM Quantum hardware using the three measurements: **T1 (energy relaxation)**, **T2 Ramsey (dephasing)**, and **randomized benchmarking (gate fidelity)**. The work is divided into two phases. First, T1, T2, and randomized benchmarking (RB) measurements of a single qubit utilizing `FakeMarrakesh` (which mirrors the real `ibm_marrakesh` Heron r2 device using IBM's published calibration data) ultimately culminating in a 156-qubit characterization of the `FakeMarrakesh` simulator. Second, a 4-qubit characterization on a real IBM Runtime backend to validate the methodology against actual device noise and compare characterization of qubits across a real chip.
+This project characterizes superconducting transmon qubits on IBM Quantum hardware using the three measurements: **T1 (energy relaxation)**, **T2 Ramsey (dephasing)**, and **randomized benchmarking (gate fidelity)**. The work is divided into two phases. First, T1, T2, and randomized benchmarking (RB) measurements of a single qubit utilizing `FakeMarrakesh` (which mirrors the real `ibm_marrakesh` Heron r2 device using IBM's published calibration data) ultimately culminating in a complete 156-qubit characterization of the `FakeMarrakesh` simulator. Second, a 4-qubit characterization on a real IBM Runtime backend to validate the methodology against real device noise and to compare characterization of qubits across a real device.
 
 The deliverable is a complete characterization pipeline: circuit construction, transpilation, execution, exponential and oscillating-decay fits, outlier masking, and visualization at scale.
 
