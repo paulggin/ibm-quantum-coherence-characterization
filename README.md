@@ -187,8 +187,7 @@ analysis/
 data/
   marrakesh_156qubit_coherence.csv  full 156-qubit FakeMarrakesh dataset
   real_hardware/                    per-qubit T1/T2/RB data + metadata for the real anchor
-plots/                              publication-ready figures (see INVENTORY.md)
-docs/                               project orientation PDF + dated overviews
+plots/                              final figures (see INVENTORY.md)
 ```
 
 ## How to reproduce
