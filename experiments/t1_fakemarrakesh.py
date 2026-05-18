@@ -1,9 +1,3 @@
-# T1 Energy Relaxation Experiment — FakeMarrakesh validation
-#
-# Uses the canonical t1_circuit and exp_decay from circuits.py so the same
-# circuit definition runs unchanged on real hardware via real_hardware_anchor.py.
-# Only the execution wrapper (AerSimulator.from_backend vs. SamplerV2) differs.
-
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
