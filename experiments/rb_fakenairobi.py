@@ -1,7 +1,4 @@
-# rb_official.py
 # Randomized Benchmarking using qiskit_experiments StandardRB
-# Production implementation used by IBM hardware teams
-# Handles all Clifford group math correctly internally
 
 from pathlib import Path
 import matplotlib.pyplot as plt
