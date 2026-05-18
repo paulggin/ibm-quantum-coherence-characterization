@@ -1,0 +1,19 @@
+{
+  "timestamp_utc": "2026-05-16T20:58:30.289102",
+  "backend": "ibm_marrakesh",
+  "qubit": 3,
+  "shots": 1024,
+  "backend_published_t1_us": 271.7123205637024,
+  "backend_published_t2_us": 144.62276997625546,
+  "backend_published_readout_err": 0.0174560546875,
+  "t1_t2_job_id": "d84dku80bvlc73d4f2ig",
+  "rb_job_ids": [
+    "d84dnlntjchs73bq5qq0"
+  ],
+  "T1_fit_us": 296.5502175314199,
+  "T2_fit_us": 208.1044767396349,
+  "T2_oscillation_freq_mhz": 0.02612203103354683,
+  "EPC": 0.0013548631504028963,
+  "EPC_err": 0.00031398856741248165,
+  "single_qubit_gate_fidelity": 0.9986451368495971
+}
