@@ -109,7 +109,7 @@ See `plots/rb_fakemarrakesh.png` for the FakeMarrakesh RB decay curve.
 
 ### Real-hardware anchor — `ibm_marrakesh`, qubit 0
 
-Run on 2026-05-16 via IBM Runtime. Each qubit gets one batched SamplerV2 job for T1 + T2, followed by `StandardRB` (50 samples × 6 sequence lengths up to 300 Cliffords) for gate fidelity. All circuits constructed by the same `circuits.py` that drives the FakeMarrakesh validation — only the execution wrapper changes.
+Ran on 2026-05-16 via IBM Runtime. Each qubit gets one batched SamplerV2 job for T1 + T2, followed by `StandardRB` (50 samples × 6 sequence lengths up to 300 Cliffords) for gate fidelity. All circuits constructed by the same `circuits.py` that drives the FakeMarrakesh validation — only the execution wrapper changes.
 
 | Qubit | T1 meas (µs) | T1 pub (µs) | T2 meas (µs) | T2 pub (µs) | EPC | Gate fidelity |
 | :-- | --: | --: | --: | --: | --: | --: |
