@@ -1,0 +1,10 @@
+Real-Hardware Anchor — ibm_marrakesh, qubit 0
+Timestamp (UTC): 2026-05-16T21:07:41.873685
+
+T1 measured:        315.1 us      (backend-published: 344.4818490801533 us)
+T2 measured:        46.1 us      (backend-published: 49.0542872382453 us)
+T2 / 2*T1 ratio:    0.073   (must be <= 1)
+EPC:                0.000646 +/- 0.000378
+Gate fidelity:      99.9354%
+
+Files saved to: C:\Users\Paul\OneDrive\Desktop\Portfolio Projects\IBM Quantum - Qiskit\outputs\real_hardware
