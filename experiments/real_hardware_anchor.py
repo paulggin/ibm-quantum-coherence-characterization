@@ -2,43 +2,11 @@
 real_hardware_anchor.py
 T1 + T2 Ramsey + Randomized Benchmarking on ONE real IBM Quantum qubit.
 
-Purpose
--------
-Anchor the FakeMarrakesh / FakeNairobi simulator-based portfolio with a
-real-device run so the writeup can honestly say "real hardware, not
-simulation."
-
-Design
-------
-- Reuses the canonical circuit definitions from circuits.py — same code that
-  validates on FakeMarrakesh runs here on real silicon. The fake-backend
-  scripts (t1_experiment.py, t2_ramsey.py) and this anchor differ only in
-  the execution wrapper (AerSimulator vs. SamplerV2).
-- Single qubit, single backend, conservative circuit budget. The 156-qubit
-  characterization is already done on the fake backend; this run is the
-  credibility anchor.
-- Backend selection: try ibm_marrakesh first for direct comparability with
-  the FakeMarrakesh portfolio. If that isn't in the account's plan, fall
-  back to ibm_brisbane (Eagle r3) and frame the comparison as "methodology
-  generalizes across hardware generations."
-- Compute budget: ~35 circuits, ~5 sec actual quantum compute. Comfortably
-  fits IBM Quantum Open Plan free tier (10 min/month).
-
-Outputs (saved to outputs/real_hardware/)
------------------------------------------
-- <backend>_q<qubit>_metadata.json   backend + qubit calibration at runtime, job IDs
-- <backend>_q<qubit>_t1.csv          delay sweep + P(|1>)
-- <backend>_q<qubit>_t2.csv          delay sweep + P(|1>)
-- <backend>_q<qubit>_t1_fit.png      fit plot
-- <backend>_q<qubit>_t2_fit.png      fit plot
-- <backend>_q<qubit>_rb_fit.png      RB decay plot
-- summary.txt                        headline T1, T2, EPC, fidelity
-
 How to run
 ----------
 1. Confirm credentials: QiskitRuntimeService.save_account(channel=..., token=...)
 2. From the source repo root:  python experiments/real_hardware_anchor.py
-3. Defaults: try Marrakesh -> Brisbane fallback, qubit 0. Edit CONFIG to override.
+3. Defaults: try Marrakesh -> fez fallback, qubit 0. Edit CONFIG to override.
 """
 
 import os
@@ -64,7 +32,7 @@ from circuits import t1_circuit, t2_ramsey_circuit, exp_decay, ramsey_decay
 # ──────────────────────────────────────────────────────────────────────────────
 # CONFIG  — edit if you want a different backend / qubit / sweep
 # ──────────────────────────────────────────────────────────────────────────────
-PREFERRED_BACKENDS = ["ibm_marrakesh", "ibm_brisbane"]   # try in order
+PREFERRED_BACKENDS = ["ibm_marrakesh", "ibm_fez"]   # try in order
 PIN_QUBIT          = 0
 SHOTS              = 1024
 
