@@ -3,8 +3,7 @@ circuits.py
 Canonical circuit-construction and fit-function definitions for the T1 / T2
 characterization pipeline.
 
-This module is the single source of truth. Both the fake-backend validation
-scripts (t1_experiment.py, t2_ramsey.py) and the real-hardware anchor
+Both the fake-backend validation scripts (t1_experiment.py, t2_ramsey.py) and the real-hardware anchor
 (real_hardware_anchor.py) import from here. That guarantees the experiment
 definition does not drift between simulator and real-device runs — only the
 execution wrapper differs.
