@@ -1,6 +1,4 @@
-# multiqubit_heatmap_marrakesh_full.py
-# Full T1 + T2Ramsey circuit experiments on all 156 FakeMarrakesh qubits
-# Runtime estimate: 60–90 min on modern laptop
+# Runtime estimate: 60–90 min
 
 import numpy as np
 import pandas as pd
