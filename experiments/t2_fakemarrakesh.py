@@ -1,9 +1,3 @@
-# T2 Ramsey Experiment — FakeMarrakesh validation
-#
-# Uses the canonical t2_ramsey_circuit and ramsey_decay from circuits.py so
-# the same circuit definition runs unchanged on real hardware via
-# real_hardware_anchor.py.
-
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
