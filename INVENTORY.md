@@ -1,6 +1,6 @@
 # Repository Inventory
 
-This is the GitHub-ready snapshot of the IBM Quantum Hardware Experiments project. Everything is portable — hardcoded Windows paths have been stripped and all file references use `Path(__file__)`-relative resolution.
+Snapshot of the IBM Quantum Coherence Characterization project
 
 ## Install
 
@@ -39,8 +39,8 @@ pip install -r requirements.txt
 │       ├── ibm_marrakesh_4qubit_summary.csv  ← aggregate of all 4 qubits
 │       └── summary.txt                   
 │
-└── plots/                                 ← publication-ready figures
-    ├── coherence_heatmap_156qubit_masked.png    ← centerpiece visual
+└── plots/                                 ← final figures
+    ├── coherence_heatmap_156qubit_masked.png    ← masked heatmap
     ├── t1_fakemarrakesh_singlequbit.png         ← single-qubit T1 fit on simulator
     ├── t2_fakemarrakesh_singlequbit.png         ← single-qubit T2 Ramsey fit on simulator
     ├── rb_fakenairobi.png                       ← RB decay on Eagle r1 simulator
@@ -49,17 +49,3 @@ pip install -r requirements.txt
     ├── t2_ibm_marrakesh_q[0-3].png              ← real-hardware T2 fits (4 qubits)
     └── rb_ibm_marrakesh_q[0-3].png              ← real-hardware RB fits (4 qubits)
 ```
-
-## File rename mapping (source → this repo)
-
-For traceability when reviewing the diff against the working repo:
-
-| Source folder/file (original) | This repo (renamed) |
-| :-- | :-- |
-| `experiments/t1_experiment.py` | `experiments/t1_fakemarrakesh.py` |
-| `experiments/t2_ramsey.py` | `experiments/t2_fakemarrakesh.py` |
-| `experiments/rb_official.py` | `experiments/rb_fakenairobi.py` |
-| `experiments/rb_marrakesh.py` | `experiments/rb_fakemarrakesh.py` |
-| `experiments/multiqubit_heatmap_marrakesh.py` | `experiments/multiqubit_characterization.py` |
-| `archive/heatmap_csv_fix.py` | `analysis/mask_outliers.py` |
-| `diagnostics/plot_heatmap.py` | `analysis/plot_coherence_he
