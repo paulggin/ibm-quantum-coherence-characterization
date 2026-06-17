@@ -8,9 +8,9 @@
 
 ## Overview
 
-This project characterizes superconducting transmon qubits on IBM Quantum hardware using the three measurements: **T1 (energy relaxation)**, **T2 Ramsey (dephasing)**, and **randomized benchmarking (gate fidelity)**. The work is divided into two phases. First, T1, T2, and randomized benchmarking (RB) measurements were conducted on a single qubit using `FakeMarrakesh`, which emulates the `ibm_marrakesh` Heron r2 device using IBM’s published calibration data. This phase ultimately scaled to a full 156-qubit characterization of the `FakeMarrakesh` simulator. Second, a 4-qubit characterization was carried out on `ibm_marrakesh`, the real IBM Runtime backend, to validate the methodology against real device noise and compare qubit characterization results across the hardware.
+This project characterizes superconducting transmon qubits on IBM Quantum hardware using the three measurements: **T1 (energy relaxation)**, **T2 Ramsey (dephasing)**, and **randomized benchmarking (gate fidelity)**. The project is divided into two parts. First, T1, T2, and randomized benchmarking (RB) measurements were conducted on a single qubit using `FakeMarrakesh`, which emulates the `ibm_marrakesh` Heron r2 device using IBM’s published calibration data. This ultimately scaled to a full 156-qubit characterization of the `FakeMarrakesh` simulator. Second, a 4-qubit characterization was carried out on `ibm_marrakesh`, the real IBM Runtime backend, to validate the methodology against real device noise and compare qubit characterization results across the hardware.
 
-The deliverable is a full characterization workflow that covers everything from building and transpiling circuits to running experiments, fitting exponential and oscillating decay curves, filtering outliers, and visualizing large-scale results.
+The deliverable is a full characterization procedure that covers everything from building and transpiling circuits to running experiments, fitting exponential and oscillating decay curves, filtering outliers, and visualizing large-scale results.
 
 ---
 
@@ -21,7 +21,7 @@ A superconducting transmon qubit is a quantum two-level system at millikelvin te
 - **T1** is the *energy relaxation time*: how long the qubit holds its excited state |1⟩ before losing energy to the environment and decaying to ground state |0⟩. On the Bloch sphere, T1 describes the population's decay toward the north pole over time.
 - **T2** is the *coherence (dephasing) time*: how long the qubit holds a definite phase in superposition before environmental noise randomizes it. It is bounded by 2 · T1, with additional pure-dephasing channels shortening it further: 1/T2 = 1/(2·T1) + 1/T_φ.
 
-These two numbers, together with single-qubit gate fidelity, measured via RB, set the practical depth limit for any algorithm running on the device. A T2 of 100 µs with a 200 ns two-qubit gate gives at most ~500 gates of coherent operation.
+These two numbers, together with single-qubit gate fidelity, measured via RB, set the practical depth limit for any algorithm running on the device. For example, a T2 of 100 µs with a 200 ns two-qubit gate gives at most ~500 gates of coherent operation.
 
 ---
 
@@ -29,7 +29,7 @@ These two numbers, together with single-qubit gate fidelity, measured via RB, se
 
 ### Code architecture
 
-Circuit definitions and fit functions are located in `experiments/circuits.py` as the primary source. Both the fake-backend validation scripts and the real-hardware anchor import from there, so the experiment definition cannot drift between simulator and real-device runs. The idea behind the FakeMarrakesh runs is to first validate everything on the simulator, then deploy the same setup directly to real hardware without modification. Only the execution wrapper (`AerSimulator.from_backend(...)` vs. `SamplerV2(mode=backend)`) differs. 
+Circuit definitions and fit functions are located in `experiments/circuits.py` as the primary source. Both the fake-backend validation scripts and the real-hardware anchor import from there, so the experiment definition cannot drift between simulator and real-device runs. The idea behind the FakeMarrakesh runs is to first validate everything on the simulator, then deploy the same setup directly to real hardware. Only the execution wrapper (`AerSimulator.from_backend(...)` vs. `SamplerV2(mode=backend)`) differs. 
 
 ### Backends
 
@@ -139,7 +139,7 @@ Single-qubit gate fidelities sit in the 99.83–99.94% band, which is consistent
 | Q2 | 0.342 | 396.5 | Amplitude-damping-limited |
 | Q3 | 0.351 | 343.0 | Amplitude-damping-limited |
 
-T_φ extracted from 1/T2 = 1/(2·T1) + 1/T_φ. Q0's phase-randomizing noise (quasi-static or 1/f) dominates its decoherence, not energy loss to the environment. The mitigation approach in this case uses Hahn-echo and CPMG dynamical decoupling to suppress dephasing, extending Q0’s effective T2 toward approximately 2·T1 (~630 µs), while leaving T1 unchanged. Q1–Q3 would benefit much less from echo sequences because they are already close to the amplitude-damping ceiling.
+T_φ extracted from 1/T2 = 1/(2·T1) + 1/T_φ. Q0's phase-randomizing noise (quasi-static or 1/f) dominates its decoherence, not energy loss to the environment. The mitigation to this uses Hahn-echo and CPMG dynamical decoupling,  refocusing pulse sequences that periodically flip the qubit's phase evolution to cancel accumulated dephasing errors, to suppress dephasing, extending Q0’s effective T2 toward approximately 2·T1 (~630 µs), while leaving T1 unchanged. Q1–Q3 would benefit much less from echo sequences because they are already close to the amplitude-damping ceiling.
 
 **Temporal Stability Study - Q0 repeated trial.** Q0 was re-measured 22 minutes after the initial run under identical conditions to probe short-timescale drift.
 
@@ -159,14 +159,6 @@ T1 remains stable within 1.2% over 22 minutes, consistent with fixed amplitude-d
 **Why T2 < 2·T1 must hold.** Any energy-relaxation event randomizes phase, so the dephasing rate 1/T2 always includes a contribution of 1/(2·T1) from amplitude damping. Pure dephasing T_φ adds to that: 1/T2 = 1/(2·T1) + 1/T_φ. A measured T2 > 2·T1 is unphysical and indicates the fit landed in a bad local minimum usually because the data is too noisy, the sweep range is wrong relative to the actual coherence time, or the oscillation frequency in the Ramsey fit was misestimated. The solution here uses an FFT-seeded initial guess for the Ramsey frequency precisely to avoid that failure.
 
 **Why qubits on the same chip have different coherence times.** Fabrication variation in junction area and oxide thickness produces small differences in transmon parameters (E_J / E_C ratio, frequency, anharmonicity). Each qubit also sees a different local microwave environment, has different proximity to TLS defects, and has different Purcell coupling to its readout resonator. The 6.9 – 579.9 µs T1 range observed on FakeMarrakesh reflects this kind of qubit-to-qubit variation, which is why hardware engineering teams characterize every qubit on a chip rather than relying on a chip-average number.
-
----
-
-## Relevance to Quantum Hardware
-
-This project follows the same measurement pipeline used in quantum hardware engineering for initial device validation and diagnostics. It builds characterization circuits, transpiles them for a real backend, fits exponential and oscillating-decay models with physical priors, filters failed fits, and scales the analysis to chip-level coherence data. These capabilities align with entry-level work in device characterization, T1/T2 benchmarking, calibration data analysis, and identifying qubits suitable for high-fidelity operation.
-
-The simulator-to-hardware comparison is the main validation step. Results on the FakeMarrakesh backend show the method scales to the 156-qubit size of a Heron r2–class device, while runs on real hardware confirm that the same analysis yields coherent, physically consistent estimates on actual qubits.
 
 ---
 
