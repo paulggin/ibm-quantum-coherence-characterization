@@ -1,12 +1,10 @@
 """
 circuits.py
-Canonical circuit-construction and fit-function definitions for the T1 / T2
-characterization pipeline.
+Root circuit-construction and fit-function definitions for T1 / T2
+characterization.
 
 Both the fake-backend validation scripts (t1_experiment.py, t2_ramsey.py) and the real-hardware anchor
-(real_hardware_anchor.py) import from here. That guarantees the experiment
-definition does not drift between simulator and real-device runs — only the
-execution wrapper differs.
+(real_hardware_anchor.py) import from here.
 
 Circuits are written as single-qubit logical circuits (QuantumCircuit(1, 1));
 the physical-qubit mapping is handled by transpile() at the call site via

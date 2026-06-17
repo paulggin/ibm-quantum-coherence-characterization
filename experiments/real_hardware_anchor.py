@@ -1,6 +1,6 @@
 """
 real_hardware_anchor.py
-T1 + T2 Ramsey + Randomized Benchmarking on ONE real IBM Quantum qubit.
+T1 + T2 Ramsey + Randomized Benchmarking on a real IBM Quantum qubit.
 
 How to run
 ----------
@@ -99,7 +99,7 @@ print(f"  Readout error = {q_readout_err}")
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# 3. BUILD AND TRANSPILE CIRCUITS  (same definitions as the fake-backend runs)
+# 3. BUILD AND TRANSPILE CIRCUITS 
 # ──────────────────────────────────────────────────────────────────────────────
 t1_circs = [t1_circuit(tau) for tau in T1_DELAYS_US]
 t2_circs = [t2_ramsey_circuit(tau, detuning_mhz=T2_DETUNING_MHZ) for tau in T2_DELAYS_US]
