@@ -201,3 +201,7 @@ python analysis/plot_coherence_heatmap.py
 # 4. Anchor on real hardware
 python experiments/real_hardware_anchor.py
 ```
+
+## Development Notes
+
+Built with AI assistance (Claude) for boilerplate, syntax lookup, and debugging. Architecture, algorithm choices, and physics/math implementation are my own. All code reviewed and understood line-by-line — happy to walk through any part of it.
