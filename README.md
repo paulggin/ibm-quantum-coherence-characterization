@@ -69,6 +69,12 @@ The fit is A · exp(−τ / T2) · cos(2π f τ + φ) + C. To avoid local minima
 
 ---
 
+## Debugging Notes
+
+The T2 Ramsey curve fit initially converged to local minima under a generic damped-cosine model — the oscillation frequency is the parameter most sensitive to a bad initial guess. Fixed by seeding the nonlinear fit from an FFT of the raw data: the FFT peak frequency gives a reliable starting point, and every run converges cleanly on the first try after that.
+
+The 156-qubit coherence sweep produced a handful of unphysical fits on the first pass — 3 of 156 qubits returned negative or implausibly large T1/T2 values where the underlying calibration data was too thin to constrain the fit. Applied a sanity filter (T1, T2 ∈ (0, 2000] µs) to mask those out rather than silently averaging them in. Headline numbers on the valid 153/156 qubits: T1 mean 211.7 µs (median 200.5 µs), T2 mean 149.8 µs (median 122.1 µs).
+
 ## Results
 
 ### Multi-qubit FakeMarrakesh characterization (156 qubits)
@@ -204,10 +210,4 @@ python experiments/real_hardware_anchor.py
 
 ## Development Notes
 
-Built with AI assistance (Claude) for boilerplate, syntax lookup, and debugging. Architecture, algorithm choices, and physics/math implementation are my own. All code reviewed and understood line-by-line — happy to walk through any part of it.
-
-## Debugging Notes
-
-The T2 Ramsey curve fit initially converged to local minima under a generic damped-cosine model — the oscillation frequency is the parameter most sensitive to a bad initial guess. Fixed by seeding the nonlinear fit from an FFT of the raw data: the FFT peak frequency gives a reliable starting point, and every run converges cleanly on the first try after that.
-
-The 156-qubit coherence sweep produced a handful of unphysical fits on the first pass — 3 of 156 qubits returned negative or implausibly large T1/T2 values where the underlying calibration data was too thin to constrain the fit. Applied a sanity filter (T1, T2 ∈ (0, 2000] µs) to mask those out rather than silently averaging them in. Headline numbers on the valid 153/156 qubits: T1 mean 211.7 µs (median 200.5 µs), T2 mean 149.8 µs (median 122.1 µs).
+Built with AI assistance (Claude) for boilerplate, syntax lookup, and debugging. Architecture, algorithm choices, and physics/math implementation are my own. 
