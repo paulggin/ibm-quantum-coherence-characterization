@@ -134,7 +134,7 @@ Full per-qubit data, metadata, and job IDs in `data/real_hardware/`. Aggregate s
 
 **Observations.**
 
-Single-qubit gate fidelities sit in the 99.83–99.94% band, which is consistent with published Heron r2 specifications. T1 and T2 measurements drift from the published values by a wider margin than the gate fidelity (Q1 T1 +40%, Q2 T2 +165%). This is expected: IBM's calibration data is refreshed on a slow cadence, and individual qubit coherence times drift hourly as two-level-system defects activate and deactivate in the dielectric and as charge-noise environments evolve. The published values are a snapshot, not a guarantee.
+Single-qubit gate fidelities sit in the 99.83–99.94% band, which is consistent with published Heron r2 specifications. T1 and T2 measurements drift from the published values by a wider margin than the gate fidelity (Q1 T1 +40%, Q2 T2 +165%). This is expected: IBM's calibration data is refreshed on a slow cadence, and individual qubit coherence times drift hourly as two-level-system defects activate and deactivate in the dielectric and as charge-noise environments evolve.
 
 **The most interesting physical observation is on Q0.** Across the four qubits, T2 sits at different fractions of the 2·T1 ceiling, with Q0 the outlier. This finding is reinforced by the short-timescale stability check:
 
