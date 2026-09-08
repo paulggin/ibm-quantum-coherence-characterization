@@ -57,7 +57,7 @@ For each delay τ in a sweep from 0 to 80–100 µs:
 4. Apply H again to convert phase into population.
 5. Measure.
 
-The fit is A · exp(−τ / T2) · cos(2π f τ + φ) + C. To avoid local minima, the initial frequency guess comes from an FFT of the residual after mean subtraction — `np.fft.rfft(probs − mean(probs))` — and the dominant component seeds the curve fit.
+The fit is A · exp(−τ / T2) · cos(2π f τ + φ) + C. To avoid local minima, the initial frequency guess comes from an FFT of the residual after mean subtraction `np.fft.rfft(probs − mean(probs))` and the dominant component seeds the curve fit.
 
 ### Randomized benchmarking
 
@@ -71,9 +71,9 @@ The fit is A · exp(−τ / T2) · cos(2π f τ + φ) + C. To avoid local minima
 
 ## Debugging Notes
 
-The T2 Ramsey curve fit initially converged to local minima under a generic damped-cosine model — the oscillation frequency is the parameter most sensitive to a bad initial guess. Fixed by seeding the nonlinear fit from an FFT of the raw data: the FFT peak frequency gives a reliable starting point, and every run converges cleanly on the first try after that.
+The T2 Ramsey curve fit initially converged to local minima under a generic damped-cosine model: the oscillation frequency is the parameter most sensitive to a bad initial guess. Fixed by seeding the nonlinear fit from an FFT of the raw data: the FFT peak frequency gives a reliable starting point, and every run converges cleanly on the first try after that.
 
-The 156-qubit coherence sweep produced a handful of unphysical fits on the first pass — 3 of 156 qubits returned negative or implausibly large T1/T2 values where the underlying calibration data was too thin to constrain the fit. Applied a sanity filter (T1, T2 ∈ (0, 2000] µs) to mask those out rather than silently averaging them in. Headline numbers on the valid 153/156 qubits: T1 mean 211.7 µs (median 200.5 µs), T2 mean 149.8 µs (median 122.1 µs).
+The 156-qubit coherence sweep produced a handful of unphysical fits on the first pass: 3 of 156 qubits returned negative or implausibly large T1/T2 values where the underlying calibration data was too thin to constrain the fit. Applied a sanity filter (T1, T2 ∈ (0, 2000] µs) to mask those out rather than silently averaging them in. Headline numbers on the valid 153/156 qubits: T1 mean 211.7 µs (median 200.5 µs), T2 mean 149.8 µs (median 122.1 µs).
 
 ## Results
 
