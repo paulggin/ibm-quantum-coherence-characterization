@@ -210,4 +210,4 @@ python experiments/real_hardware_anchor.py
 
 ## Development Notes
 
-Built with AI assistance (Claude) for boilerplate, syntax lookup, and debugging. Architecture, algorithm choices, and physics/math implementation are my own. 
+Built with AI assistance (Claude) for boilerplate, syntax lookup, and debugging.
